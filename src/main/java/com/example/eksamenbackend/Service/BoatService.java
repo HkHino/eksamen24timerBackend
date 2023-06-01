@@ -1,6 +1,6 @@
 package com.example.eksamenbackend.Service;
 
-import com.example.eksamenbackend.Model.BoatModel;
+import com.example.eksamenbackend.Model.Boat;
 import com.example.eksamenbackend.Repository.BoatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class BoatService {
     @Autowired
     BoatRepository database;
 
-    public List<BoatModel> getAllBoats () {
+    public List<Boat> getAllBoats () {
         return database.findAll();
     }
 
@@ -20,11 +20,11 @@ public class BoatService {
         database.deleteAll();
     }
 
-    public BoatModel getBoatById (int id) {
+    public Boat getBoatById (int id) {
         return database.findById(id).orElse(null);
     }
 
-    public BoatModel createBoat (BoatModel boat) {
+    public Boat createBoat (Boat boat) {
         return database.save(boat);
     }
 
@@ -32,7 +32,7 @@ public class BoatService {
         database.deleteById(id);
     }
 
-    public BoatModel editBoatById (int id, BoatModel boat) throws Exception {
+    public Boat editBoatById (int id, Boat changes) throws Exception {
 
         var target = database.findById(id).orElse(null);
 
@@ -40,12 +40,7 @@ public class BoatService {
             throw new Exception("The ID does not exist!");
         }
 
-        target.setPoints(boat.getPoints());
-        /*target.setDato(boat.getDato());
-        target.setFod25(boat.get()); //todo spørg philip om en bedre løsning
-        target.setFod25_40(boat.get());
-        target.setFod40(boat.get());
-        */
+        target.setType(changes.getType());
         database.save(target);
 
         return target;

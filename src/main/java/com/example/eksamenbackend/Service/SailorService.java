@@ -1,37 +1,38 @@
 package com.example.eksamenbackend.Service;
 
-import com.example.eksamenbackend.Model.SailerModel;
+import com.example.eksamenbackend.Model.Sailor;
 import com.example.eksamenbackend.Repository.SailerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SailerService {
+public class SailorService
+{
     @Autowired
     SailerRepository database;
 
-    public List<SailerModel> getAllSailers () {
+    public List<Sailor> getAllSailors() {
         return database.findAll();
     }
 
-    public void deleteAllSailers () {
+    public void deleteAllSailors() {
         database.deleteAll();
     }
 
-    public SailerModel getSailerById (int id) {
+    public Sailor getSailorById(int id) {
         return database.findById(id).orElse(null);
     }
 
-    public SailerModel createSailer (SailerModel boat) {
-        return database.save(sailer);
+    public Sailor createSailor(Sailor sailor) {
+        return database.save(sailor);
     }
 
-    public void deleteSailer (int id) {
+    public void deleteSailors(int id) {
         database.deleteById(id);
     }
 
-    public SailerModel editSailerById (int id, SailerModel sailer) throws Exception {
+    public Sailor editSailorById(int id, Sailor sailor) throws Exception {
 
         var target = database.findById(id).orElse(null);
 

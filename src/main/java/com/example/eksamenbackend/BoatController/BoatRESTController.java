@@ -1,6 +1,6 @@
 package com.example.eksamenbackend.BoatController;
 
-import com.example.eksamenbackend.Model.BoatModel;
+import com.example.eksamenbackend.Model.Boat;
 import com.example.eksamenbackend.Service.BoatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,13 @@ public class BoatRESTController {
 
     @Autowired
     BoatService boatRepository;
+
     /**
      * This endpoint gets all boats
      * @return List of boats in the database
      */
     @GetMapping("/boats")
-    public ResponseEntity<List<BoatModel>> getAllBoats () {
-
+    public ResponseEntity<List<Boat>> getAllBoats () {
         return new ResponseEntity<>(boatRepository.getAllBoats(), HttpStatus.OK);
     }
 
@@ -33,7 +33,7 @@ public class BoatRESTController {
 
         boatRepository.deleteAllBoats();
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
@@ -42,7 +42,7 @@ public class BoatRESTController {
      * @return a boat object
      */
     @GetMapping("/boats/{id}")
-    public ResponseEntity<BoatModel> getBoatById (@PathVariable("id") Integer id) {
+    public ResponseEntity<Boat> getBoatById (@PathVariable("id") int id) {
 
         var result = boatRepository.getBoatById(id);
 
@@ -60,7 +60,7 @@ public class BoatRESTController {
      * @return The created boat.
      */
     @PutMapping("/boats")
-    public ResponseEntity<BoatModel> createBoat (@RequestBody BoatModel boat) {
+    public ResponseEntity<Boat> createBoat (@RequestBody Boat boat) {
 
         // Error handling, in case the provided model is missing fields.
         if (boat.IsValid() == false) {
@@ -79,7 +79,7 @@ public class BoatRESTController {
      * @return nothing.
      */
     @DeleteMapping("/boats/{id}")
-    public ResponseEntity deleteBoats (@PathVariable int id) {
+    public ResponseEntity deleteBoatById (@PathVariable int id) {
 
         // TODO: Maybe catch exception and error handle.
         boatRepository.deleteBoat(id);
@@ -90,20 +90,20 @@ public class BoatRESTController {
     /**
      * This endpoint allows for changes to a boats, by id.
      * @param id - The id on the boat to change.
-     * @param boat - The new boat object with the changed values.
+     * @param changes - The new boat object with the changed values.
      * @return The new and changed object.
      */
     @PostMapping("boats/{id}")
-    public ResponseEntity<BoatModel> editBoat (@PathVariable("id") int id, @RequestBody BoatModel boat) {
+    public ResponseEntity<Boat> editBoatById (@PathVariable("id") int id, @RequestBody Boat changes) {
 
         // Error handling, in case the provided model is missing fields.
-        if (boat.IsValid() == false) {
+        if (changes.IsValid() == false) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
         try
         {
-            var result = boatRepository.editBoatById(id, boat);
+            var result = boatRepository.editBoatById(id, changes);
 
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
