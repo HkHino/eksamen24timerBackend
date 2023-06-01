@@ -60,13 +60,8 @@ public class SailorRESTController
      * @param sailor - The sailor to create.
      * @return The created sailor.
      */
-    @PutMapping("/sailors")
+    @PostMapping("/sailors")
     public ResponseEntity<Sailor> createSailor (@RequestBody Sailor sailor) {
-
-        // Error handling, in case the provided model is missing fields.
-        if (sailor.IsValid() == false) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
 
         // TODO: Maybe catch exception and error handle.
         var result = sailorRepository.createSailor(sailor);
@@ -94,7 +89,7 @@ public class SailorRESTController
      * @param changes - The new sailor object with the changed values.
      * @return The new and changed object.
      */
-    @PostMapping("sailor/{id}")
+   /* @PostMapping("sailor/{id}")
     public ResponseEntity<Sailor> editSailor (@PathVariable("id") int id, @RequestBody Sailor changes) {
 
         // Error handling, in case the provided model is missing fields.
@@ -113,5 +108,5 @@ public class SailorRESTController
             // Error handling, if ID does not exist.
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-    }
+    } */
 }

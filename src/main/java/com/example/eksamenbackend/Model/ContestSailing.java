@@ -1,38 +1,24 @@
 package com.example.eksamenbackend.Model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Table(name = "ContestSailing")
 public class ContestSailing
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contestId;
     private int boatId;
     private int placement;
-
-    public int getContestId()
-    {
-        return contestId;
-    }
-
-    public void setContestId(int contestId)
-    {
-        this.contestId = contestId;
-    }
-
-    public int getBoatId()
-    {
-        return boatId;
-    }
-
-    public void setBoatId(int boatId)
-    {
-        this.boatId = boatId;
-    }
-
-    public int getPlacement()
-    {
-        return placement;
-    }
-
-    public void setPlacement(int placement)
-    {
-        this.placement = placement;
-    }
 }

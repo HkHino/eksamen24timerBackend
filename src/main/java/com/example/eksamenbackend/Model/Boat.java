@@ -8,7 +8,6 @@ public class Boat
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "id")
     private int id;
 
     //todo this should be done as an enum, as this would be significantly better
