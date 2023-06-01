@@ -6,31 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @CrossOrigin
 @RestController
-public class SailorRESTController
-{
+public class SailorRESTController {
     @Autowired
     SailorService sailorRepository;
 
     /**
      * This endpoint gets all Sailors
+     *
      * @return List of Sailors in the database
      */
     @GetMapping("/sailors")
-    public ResponseEntity<List<Sailor>> getAllSailors () {
+    public ResponseEntity<List<Sailor>> getAllSailors() {
 
         return new ResponseEntity<>(sailorRepository.getAllSailors(), HttpStatus.OK);
     }
 
     /**
      * This endpoint deletes all Sailors.
+     *
      * @return null
      */
     @DeleteMapping("/sailors")
-    public ResponseEntity deleteAllSailors () {
+    public ResponseEntity deleteAllSailors() {
 
         sailorRepository.deleteAllSailors();
 
@@ -39,11 +41,12 @@ public class SailorRESTController
 
     /**
      * This endpoint gets a single sailor by ID
+     *
      * @param id - The id on the sail
      * @return a sail object
      */
     @GetMapping("/sailors/{id}")
-    public ResponseEntity<Sailor> getSailorById (@PathVariable("id") int id) {
+    public ResponseEntity<Sailor> getSailorById(@PathVariable("id") int id) {
 
         var result = sailorRepository.getSailorById(id);
 
@@ -57,11 +60,12 @@ public class SailorRESTController
 
     /**
      * This endpoint creates a new sailor, from a sailor object
+     *
      * @param sailor - The sailor to create.
      * @return The created sailor.
      */
     @PostMapping("/sailors")
-    public ResponseEntity<Sailor> createSailor (@RequestBody Sailor sailor) {
+    public ResponseEntity<Sailor> createSailor(@RequestBody Sailor sailor) {
 
         // TODO: Maybe catch exception and error handle.
         var result = sailorRepository.createSailor(sailor);
@@ -71,11 +75,12 @@ public class SailorRESTController
 
     /**
      * This endpoint deletes a specific sailor by the id.
+     *
      * @param id - The id on the sailor.
      * @return nothing.
      */
     @DeleteMapping("/sailor/{id}")
-    public ResponseEntity deleteSailorById (@PathVariable int id) {
+    public ResponseEntity deleteSailorById(@PathVariable int id) {
 
         // TODO: Maybe catch exception and error handle.
         sailorRepository.deleteSailors(id);
@@ -85,28 +90,21 @@ public class SailorRESTController
 
     /**
      * This endpoint allows for changes to a sailors, by id.
-     * @param id - The id on the sailor to change.
+     *
+     * @param id      - The id on the sailor to change.
      * @param changes - The new sailor object with the changed values.
      * @return The new and changed object.
      */
-   /* @PostMapping("sailor/{id}")
-    public ResponseEntity<Sailor> editSailor (@PathVariable("id") int id, @RequestBody Sailor changes) {
+    @PostMapping("sailor/{id}")
+    public ResponseEntity<Sailor> editSailor(@PathVariable("id") int id, @RequestBody Sailor changes) {
 
-        // Error handling, in case the provided model is missing fields.
-        if (changes.IsValid() == false) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-
-        try
-        {
+        try {
             var result = sailorRepository.editSailorById(id, changes);
 
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-        catch (Exception exception)
-        {
+        } catch (Exception exception) {
             // Error handling, if ID does not exist.
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-    } */
+    }
 }
