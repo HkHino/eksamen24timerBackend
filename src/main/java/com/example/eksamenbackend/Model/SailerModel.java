@@ -10,28 +10,19 @@ public class SailerModel {
     @Column(name = "id")
     private int id;
 
-    private int points;
+    private boolean participates;
     //private Date dato;
     private boolean fod25;
     private boolean fod25_40;
     private boolean fod40;
 
 
-    /**
-     * A method, that checks if a boat method is valid. This is used when determining
-     * if a model, provided by the frontend, contains the required fields, with decent values.
-     *
-     * @return - true is the object is valid.
-     */
-    public boolean IsValid() {
-        return (points) >= 0; //todo spørg philip om en fornuftig løsning eller om bools bare er en dårlig ide
+    public boolean isParticipates() {
+        return participates;
     }
 
-    /**
-     * This is a helper method, that checks if a string is either null or empty.
-     */
-    public boolean IsNullOrEmpty(String input) {
-        return input == null || input.length() == 0;
+    public void setParticipates(boolean participates) {
+        this.participates = participates;
     }
 
     public int getId() {
@@ -40,14 +31,6 @@ public class SailerModel {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
     /*

@@ -38,13 +38,12 @@ public class SailerService {
         if (target == null) {
             throw new Exception("The ID does not exist!");
         }
-
-        target.setPoints(sailer.getPoints());
-        /*target.setDato(boat.getDato());
+      /*
+        target.setDato(boat.getDato());
         target.setFod25(boat.get()); //todo spørg philip om en bedre løsning
         target.setFod25_40(boat.get());
         target.setFod40(boat.get());
-        */
+      */
         database.save(target);
 
         return target;
